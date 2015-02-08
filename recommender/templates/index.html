@@ -1,0 +1,52 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+	<title>
+		MovieRecommender
+	</title>
+	<link href="static/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	body{
+	background-color: #00BCD4;	
+	margin:0;
+	padding:0;
+	}
+	#main-bar{
+		float:top;
+		margin-top:18%;
+		width:1000px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	</style>
+</head>
+<body>
+
+<div id="main-bar" >
+	<form class="form-inline">
+		
+		<div class="form-group">
+    	<label for="count">Suggest me </label>
+  		<input type="text" class="form-control" id="count" placeholder="how many...">
+  		</div>
+		
+  		<div class="form-group">
+    	<label for="genre">&nbsp;</label>
+		<input type="text" class="form-control" id="genre" placeholder="genre here...">
+		</div>
+
+		<div class="form-group">
+    	<label for="rating">movies of rating </label>
+		<input type="text" class="form-control" id="rating" placeholder="rating here...">
+		</div>
+		<input type="submit" class="btn btn-primary" value="suggest">
+		
+		
+	</form>
+	Eg : Suggest me 5 action movies of rating 9.1
+</div>
+</body>
+</html>
