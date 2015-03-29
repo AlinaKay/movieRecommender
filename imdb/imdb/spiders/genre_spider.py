@@ -34,11 +34,17 @@ class DmozSpider(scrapy.Spider):
         # times=count_text/50+1
 
         '''either get the count of each genre from imdb page or uncomment the above. i suggest the former one'''
-        times = 51/50+1
+        times = 29125/50+1
         #times = 29125/50+1
 
         return times
-        
+    
+    def filterNA(self,item):
+        if item=="":
+            return "NA"
+        else:
+            return item
+
 
     def parse(self,response):
         #pass
@@ -53,8 +59,12 @@ class DmozSpider(scrapy.Spider):
             year_type=sel.xpath('span[@class="year_type"]/text()').extract()
             year_type=''.join(year_type)
             year_type=year_type.strip("()")
+            #year_type=self.filterNA(year_type)
             user_rating=sel.xpath('div[@class="user_rating"]/div/@title').extract()
             user_rating=''.join(user_rating)
+            user_rating=user_rating.replace(',','')
+            user_rating=user_rating[user_rating.find('(')+1:user_rating.find(' votes')]
+            user_rating=self.filterNA(user_rating)
             rating_rating=sel.xpath('div[@class="user_rating"]/div/span[@class="rating-rating"]/span/text()').extract()
             if len(rating_rating)==3:
                 rating_rating=rating_rating[0]
@@ -62,15 +72,24 @@ class DmozSpider(scrapy.Spider):
                 rating_rating="NA"
             outline=sel.xpath('span[@class="outline"]/text()').extract()
             outline=''.join(outline)
+            outline=self.filterNA(outline)
+
             credit_dir=sel.xpath('span[@class="credit"]/a/text()').extract()
-            credit_with=sel.xpath('span[@class="credit"]/a/text()').extract()
+            credit_dir=self.filterNA(credit_dir)
+
+            credit_with=sel.xpath('span[@class="credit"]/a/text()').extract()            
+            credit_with=self.filterNA(credit_with)
+
             genre=sel.xpath('span[@class="genre"]/a/text()').extract()
+            genre=self.filterNA(genre)
+           
             mins=sel.xpath('span[@class="runtime"]/text()').extract()
             mins=''.join(mins)
-            if mins=="":
-                mins=0
+            if not mins:
+                mins="NA"
             else:
                 mins=mins.split(' ')[0]
+
             item['title']=title
             item['title_href']=title_href
             item['year_type']=year_type
