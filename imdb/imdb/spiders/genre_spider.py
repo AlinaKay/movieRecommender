@@ -14,12 +14,35 @@ class DmozSpider(scrapy.Spider):
     def generateUrls(self,count):
         url_list=[]
         t=1
-        genre='action'
+        genre='biography'
+        #action done
+        #adventure done
+        #animation 4210 done
+        #biography 3695
+        #comedy 66231
+        #crime 20471
+        #drama 123407
+        #family 9748
+        #fantasy 8473
+        #film_noir 663
+        #history 4429
+        #horror 17405
+        #music 4001
+        #musical 7651
+        #mystery 317643
+        # Romance
+        # Sci-Fi
+        # Short
+        # Sport
+        # Thriller
+        # War
+        # Western
+        #documentary 185060 change in url
 
         for i in range(count):
             t=1+i*50
             #print t
-            base_url='http://www.imdb.com/search/title?genres=%s&sort=moviemeter,asc&start=%s&title_type=feature'%(genre,t)
+            base_url='http://www.imdb.com/search/title?sort=moviemeter,asc&start=%s&title_type=feature'%(t)
             url_list.append(base_url)
         return url_list
 
@@ -34,7 +57,7 @@ class DmozSpider(scrapy.Spider):
         # times=count_text/50+1
 
         '''either get the count of each genre from imdb page or uncomment the above. i suggest the former one'''
-        times = 29125/50+1
+        times = 317643/50+1
         #times = 29125/50+1
 
         return times
